@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, prefer_const_literals_to_create_immutables, use_key_in_widget_constructors
 import 'package:flutter/material.dart';
 //
-import 'package:movies_app/src/models/models.dart';
 import 'package:movies_app/src/themes/theme.dart';
+import 'package:movies_app/src/models/models.dart';
+import 'package:movies_app/src/widgets/widgets.dart';
 
 class DetailsMoviesScreen extends StatelessWidget {
   @override
@@ -18,6 +19,8 @@ class DetailsMoviesScreen extends StatelessWidget {
               [
                 _PosterMoviesDetails(movie: movie),
                 _OverViewMovie(movie: movie),
+                SizedBox(height: 30),
+                CreditsMovie(movieId: movie.id),
                 // SOLO PARA EL EFECTO DEL APPBAR
                 Container(
                   width: double.infinity,

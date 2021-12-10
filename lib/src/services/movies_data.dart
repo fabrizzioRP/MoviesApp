@@ -16,6 +16,8 @@ class MoviesData extends ChangeNotifier {
 
   List<Movies> onPopularMovies = [];
 
+  Map<int, List<Cast>> creditMovies = {};
+
   int _popularPage = 0;
 
   MoviesData() {
@@ -53,6 +55,15 @@ class MoviesData extends ChangeNotifier {
       onPopularMovies = [...onPopularMovies, ...popularResponse.results];
       notifyListeners();
     }
+  }
+
+  Future<List<Cast>> getCreditMovies(int idMovie) async {
+    if (creditMovies.containsKey(idMovie)) return creditMovies[idMovie]!;
+
+    final jsonData = await _getJsonData('3/movie/$idMovie/credits');
+    final creditResponse = CreditResponse.fromJson(jsonData);
+    creditMovies[idMovie] = creditResponse.cast;
+    return creditResponse.cast;
   }
 
   // Stream
