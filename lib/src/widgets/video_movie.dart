@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,25 +18,21 @@ class VideoMoviePlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     final moviesProvider = Provider.of<MoviesData>(context, listen: false);
     return FutureBuilder(
-      future: moviesProvider.getVideoMovies(movieId),
-      builder: (_, AsyncSnapshot<List<Result>> snapshot) {
-        if (!snapshot.hasData) {
-          return waitForData;
-        }
+        future: moviesProvider.getVideoMovies(movieId),
+        builder: (_, AsyncSnapshot<List<Result>> snapshot) {
+          if (!snapshot.hasData) return waitForData;
 
-        final results = snapshot.data;
+          final results = snapshot.data;
 
-        return Container(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-          width: double.infinity,
-          height: 300,
-          // color: Colors.red,
-          // child: Text(' veremos si funciona : ${results![0].key}'),
-          child: VideoMoviePlayer1(
-              youtubeURL: 'https://www.youtube.com/watch?v=${results![0].key}'),
-        );
-      },
-    );
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            width: double.infinity,
+            height: 300,
+            child: VideoMoviePlayer1(
+                youtubeURL:
+                    'https://www.youtube.com/watch?v=${results![0].key}'),
+          );
+        });
   }
 }
 

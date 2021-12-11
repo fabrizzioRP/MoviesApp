@@ -33,7 +33,15 @@ final Widget waitForData = Container(
   width: double.infinity,
   height: 180,
   child: Center(
-    child: CupertinoActivityIndicator(),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      // ignore: prefer_const_literals_to_create_immutables
+      children: [
+        CupertinoActivityIndicator(),
+        SizedBox(height: 15),
+        Text('No hay Data :( '),
+      ],
+    ),
   ),
 );
 

@@ -23,7 +23,6 @@ class MoviesData extends ChangeNotifier {
   int _popularPage = 0;
 
   MoviesData() {
-    // print('Movies Provider Inicializado');
     getOnDisplayMovies();
     getOnPopularMovies();
   }
@@ -74,12 +73,16 @@ class MoviesData extends ChangeNotifier {
     final jsonData = await _getJsonData('3/movie/$idMovie/videos');
     final videosResponse = VideosMovies.fromJson(jsonData);
 
-    if (videosResponse.results.length == 2) {
-      videosResponse.results.removeAt(1);
-    }
+    if (videosResponse.results.isNotEmpty) {
+      if (videosResponse.results.length == 2) {
+        videosResponse.results.removeAt(1);
+      }
 
-    videosMovies[idMovie] = videosResponse.results;
-    return videosResponse.results;
+      videosMovies[idMovie] = videosResponse.results;
+      return videosResponse.results;
+    } else {
+      return throw Error.safeToString('ERROR AL CAPTURAR DATOS');
+    }
   }
 
   // Stream
