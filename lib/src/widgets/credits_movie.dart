@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //
+import 'package:movies_app/src/themes/theme.dart';
 import 'package:movies_app/src/models/models.dart';
 import 'package:movies_app/src/services/movies_data.dart';
 
@@ -20,11 +21,7 @@ class CreditsMovie extends StatelessWidget {
         future: moviesProvider.getCreditMovies(movieId),
         builder: (_, AsyncSnapshot<List<Cast>> snapshot) {
           if (!snapshot.hasData) {
-            return Container(
-              constraints: BoxConstraints(maxWidth: 150),
-              height: 180,
-              child: CupertinoActivityIndicator(),
-            );
+            return waitForData;
           }
 
           final cast = snapshot.data;

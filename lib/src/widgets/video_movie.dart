@@ -1,18 +1,55 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+//
+import 'package:movies_app/src/themes/theme.dart';
+import 'package:movies_app/src/models/models.dart';
+import 'package:movies_app/src/services/services.dart';
 
-class VideoMoviePlayer extends StatefulWidget {
+class VideoMoviePlayer extends StatelessWidget {
+  final int movieId;
+
+  const VideoMoviePlayer({required this.movieId});
+
+  @override
+  Widget build(BuildContext context) {
+    final moviesProvider = Provider.of<MoviesData>(context, listen: false);
+    return FutureBuilder(
+      future: moviesProvider.getVideoMovies(movieId),
+      builder: (_, AsyncSnapshot<List<Result>> snapshot) {
+        if (!snapshot.hasData) {
+          return waitForData;
+        }
+
+        final results = snapshot.data;
+
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+          width: double.infinity,
+          height: 300,
+          // color: Colors.red,
+          // child: Text(' veremos si funciona : ${results![0].key}'),
+          child: VideoMoviePlayer1(
+              youtubeURL: 'https://www.youtube.com/watch?v=${results![0].key}'),
+        );
+      },
+    );
+  }
+}
+
+class VideoMoviePlayer1 extends StatefulWidget {
   final String? youtubeURL;
 
-  const VideoMoviePlayer({required this.youtubeURL});
+  const VideoMoviePlayer1({required this.youtubeURL});
 
   @override
   _VideoMoviePlayerState createState() => _VideoMoviePlayerState();
 }
 
-class _VideoMoviePlayerState extends State<VideoMoviePlayer> {
+class _VideoMoviePlayerState extends State<VideoMoviePlayer1> {
   late YoutubePlayerController _controller;
 
   @override

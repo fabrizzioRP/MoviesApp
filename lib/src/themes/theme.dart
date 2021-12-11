@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_equal_for_default_values, avoid_print, prefer_const_declarations
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, prefer_equal_for_default_values, avoid_print, prefer_const_declarations, sized_box_for_whitespace
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //
@@ -27,6 +28,15 @@ List<ButtomComponents> items2(BuildContext context) {
 final String text1 = 'Explorar y recorrer Netflix es cada vez más fácil';
 final String text2 = 'Filtra todo el catalogo por categora, idioma y más.';
 final String text3 = 'Ir a Filtros >';
+
+final Widget waitForData = Container(
+  width: double.infinity,
+  height: 180,
+  child: Center(
+    child: CupertinoActivityIndicator(),
+  ),
+);
+
 
 // Navigator.pushNamed(context, 'homescreen');
 // Navigator.of(context).pop();

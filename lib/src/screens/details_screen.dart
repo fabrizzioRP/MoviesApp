@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/src/themes/theme.dart';
 import 'package:movies_app/src/models/models.dart';
 import 'package:movies_app/src/widgets/widgets.dart';
+import 'package:movies_app/src/widgets/video_movie.dart';
 
 class DetailsMoviesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final movie = ModalRoute.of(context)!.settings.arguments as Movies;
+    // final String? videoURL = dataProvider[movie.id]![0].key;
+    // print(dataProvider[movie.id]![0].key);
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
@@ -20,12 +23,9 @@ class DetailsMoviesScreen extends StatelessWidget {
                 _PosterMoviesDetails(movie: movie),
                 _OverViewMovie(movie: movie),
                 SizedBox(height: 30),
+                VideoMoviePlayer(movieId: movie.id),
+                SizedBox(height: 30),
                 CreditsMovie(movieId: movie.id),
-                // SOLO PARA EL EFECTO DEL APPBAR
-                Container(
-                  width: double.infinity,
-                  height: 400,
-                ),
               ],
             ),
           )
