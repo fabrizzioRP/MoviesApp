@@ -6,13 +6,6 @@ import 'package:movies_app/src/themes/theme.dart';
 import 'package:movies_app/src/widgets/widgets.dart';
 import 'package:movies_app/src/services/services.dart';
 
-// class MoviesMainScreen extends StatefulWidget {
-//   final ScrollController scrollController;
-//   const MoviesMainScreen({required this.scrollController});
-//   @override
-//   State<MoviesMainScreen> createState() => MoviesMainScreenState();
-// }
-
 class MoviesMainScreen extends StatelessWidget {
   final ScrollController scrollController;
   PageController _pageController = PageController();
@@ -22,6 +15,10 @@ class MoviesMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dataProvider = Provider.of<MoviesData>(context);
+
+    // print('IMPRIMIENDO DE LA FUNCION : ${dataProvider.getVideoMovies(634649)}');
+    // print('IMPRIMIENDO DEL MAPA: ${dataProvider.videosMovies[634649]![0].key}');
+
     return Container(
       child: CustomScrollView(
         controller: scrollController,
